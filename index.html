@@ -5,43 +5,42 @@
   <title>Kod odpowiedzi (2 pola)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; background:#f9f9f9; transition:background 0.3s;}
+    body {font-family:Arial,sans-serif;background:#f9f9f9;transition:background .3s}
     .container{max-width:520px;margin:60px auto;padding:2em;background:#fff;border-radius:14px;
-               box-shadow:0 4px 16px #0002;text-align:center;}
-    .top-icon{display:block;margin:0 auto 1.2em;max-width:140px;}
+               box-shadow:0 4px 16px #0002;text-align:center}
+    .top-icon{display:block;margin:0 auto 1.2em;max-width:140px}
 
-    /* inputy obok siebie */
-    .inputs{display:flex;gap:10px;justify-content:center;margin-bottom:0.8em;}
-    .inputs input{flex:1 1 45%;font-size:1.6em;padding:.3em .4em;text-align:center;
-                  letter-spacing:.15em;}
+    /* pola jedno pod drugim + duży plus */
+    .inputs{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:.8em}
+    .inputs input{font-size:1.6em;padding:.3em .4em;text-align:center;letter-spacing:.15em;
+                  width:80%}
+    .big-plus{font-size:2.8em;font-weight:bold;color:#444;}
 
     button{width:60px;height:60px;border-radius:50%;border:none;background:#227733;color:#fff;
-           font-size:2em;cursor:pointer;}
-    button:hover{background:#1b5d29;}
+           font-size:2em;cursor:pointer}
+    #response{margin-top:1.3em;min-height:2em}
+    #response img{width:120px}
 
-    #response{margin-top:1.3em;min-height:2em;}
-    #response img{width:120px;}
-    .good{background:#d8f5dd;color:#227733;border-radius:8px;padding:.6em;font-size:2em;}
-    .bad{background:transparent;color:transparent;}
-    .neutral{background:#f1f1f1;color:#333;border:1px solid #ccc;border-radius:8px;padding:.6em;}
+    .good{background:#d8f5dd;color:#227733;border-radius:8px;padding:.6em;font-size:2em}
+    .bad{background:transparent;color:transparent}
+    .neutral{background:#f1f1f1;color:#333;border:1px solid #ccc;border-radius:8px;padding:.6em}
 
-    body.fail-bg{background:#d32f2f;}
-    body.fail-bg .container{background:#ffebee;}
-    #answerTable{display:none;}          /* tylko do edycji w kodzie */
+    body.fail-bg{background:#d32f2f}
+    body.fail-bg .container{background:#ffebee}
+
+    #answerTable{display:none}
   </style>
 </head>
 <body>
-  <!-- DUŻA IKONKA GEARS.PNG -->
+  <!-- zmieniona ikonka -->
   <div class="container">
-    <img src="assets/COMBINE.PNG" alt="Combine" class="top-icon"/>
+    <img src="assets/COMBINE.png" alt="Combine" class="top-icon">
 
     <form id="codeForm" autocomplete="off">
       <div class="inputs">
-        <!-- lewe i prawe pole -->
-        <input id="leftInput"  type="text" maxlength="6" pattern="[A-Za-z0-9]*" placeholder="···"
-               required>
-        <input id="rightInput" type="text" maxlength="6" pattern="[A-Za-z0-9]*" placeholder="···"
-               required>
+        <input id="leftInput"  type="text" maxlength="6" pattern="[A-Za-z0-9]*" placeholder="···" required>
+        <div class="big-plus">+</div>
+        <input id="rightInput" type="text" maxlength="6" pattern="[A-Za-z0-9]*" placeholder="···" required>
       </div>
       <button type="submit" aria-label="Sprawdź">&#10148;</button>
     </form>
@@ -49,80 +48,43 @@
     <div id="response"></div>
   </div>
 
-  <!-- ======  ŁATWA EDYCJA PAR (30 przykładowych)  ====== -->
+  <!-- =====  ŁATWA EDYCJA PAR  ===== -->
   <table id="answerTable"><tbody>
-    <!--  LEWA  |  PRAWA  |  ODPOWIEDŹ (bez §, doda się automatycznie) -->
     <tr><td>1</td><td>12</td><td>Połączenie 1-12 poprawne!</td></tr>
+    <!-- 29 kolejnych – edytuj ↓ -->
     <tr><td>2</td><td>34</td><td>Dobra robota (2-34)</td></tr>
-    <tr><td>3</td><td>56</td><td>Pasuje idealnie!</td></tr>
-    <tr><td>4</td><td>78</td><td>Świetnie!</td></tr>
-    <!-- 26 kolejnych wierszy – edytuj swobodnie ↓↓↓ -->
-    <tr><td>A</td><td>B</td><td>Litery A-B zaakceptowane</td></tr>
-    <tr><td>ABC</td><td>123</td><td>ABC-123 działa</td></tr>
-    <tr><td>Q</td><td>W</td><td>Q+W poprawne</td></tr>
-    <tr><td>X</td><td>Y</td><td>X-Y zgodne</td></tr>
-    <tr><td>AA</td><td>BB</td><td>Para AA-BB trafiona!</td></tr>
-    <tr><td>10</td><td>20</td><td>10-20 OK</td></tr>
-    <tr><td>11</td><td>22</td><td>11-22 OK</td></tr>
-    <tr><td>33</td><td>44</td><td>33-44 OK</td></tr>
-    <tr><td>55</td><td>66</td><td>55-66 OK</td></tr>
-    <tr><td>77</td><td>88</td><td>77-88 OK</td></tr>
-    <tr><td>A1</td><td>B2</td><td>A1-B2 poprawne</td></tr>
-    <tr><td>C3</td><td>D4</td><td>C3-D4 poprawne</td></tr>
-    <tr><td>E5</td><td>F6</td><td>E5-F6 poprawne</td></tr>
-    <tr><td>G7</td><td>H8</td><td>G7-H8 poprawne</td></tr>
-    <tr><td>XY</td><td>99</td><td>XY-99 poprawne</td></tr>
-    <tr><td>ZZ</td><td>00</td><td>ZZ-00 poprawne</td></tr>
-    <tr><td>AB</td><td>CD</td><td>AB-CD poprawnie</td></tr>
-    <tr><td>EF</td><td>GH</td><td>EF-GH poprawnie</td></tr>
-    <tr><td>12</td><td>21</td><td>12-21 poprawnie</td></tr>
-    <tr><td>34</td><td>43</td><td>34-43 poprawnie</td></tr>
-    <tr><td>56</td><td>65</td><td>56-65 poprawnie</td></tr>
-    <tr><td>78</td><td>87</td><td>78-87 poprawnie</td></tr>
-    <tr><td>90</td><td>09</td><td>90-09 poprawnie</td></tr>
-    <tr><td>HELLO</td><td>WORLD</td><td>HELLO-WORLD!</td></tr>
-    <tr><td>FOO</td><td>BAR</td><td>FOO-BAR!</td></tr>
-    <tr><td>LEFT</td><td>RIGHT</td><td>LEFT-RIGHT!</td></tr>
+    <!-- … -->
   </tbody></table>
-  <!-- ======================================================= -->
 
   <script>
-  /* budujemy mapę "lew|prawo" → odpowiedź */
-  const pairMap = {};
-  document.querySelectorAll('#answerTable tbody tr').forEach(r=>{
-    const [l,rgt,msg] = r.querySelectorAll('td');
-    const key = `${l.textContent.trim().toUpperCase()}|${rgt.textContent.trim().toUpperCase()}`;
-    pairMap[key] = msg.textContent.trim();
-  });
+    const pairMap={};
+    document.querySelectorAll('#answerTable tbody tr').forEach(r=>{
+      const [l,rgt,msg]=r.querySelectorAll('td');
+      pairMap[`${l.textContent.trim().toUpperCase()}|${rgt.textContent.trim().toUpperCase()}`]=msg.textContent.trim();
+    });
 
-  const left  = document.getElementById('leftInput');
-  const right = document.getElementById('rightInput');
-  const resp  = document.getElementById('response');
-  const form  = document.getElementById('codeForm');
+    const left  = document.getElementById('leftInput');
+    const right = document.getElementById('rightInput');
+    const resp  = document.getElementById('response');
 
-  form.addEventListener('submit', e=>{
-    e.preventDefault();
-    const l = left.value.trim().toUpperCase();
-    const r = right.value.trim().toUpperCase();
-    const key = `${l}|${r}`;
+    document.getElementById('codeForm').addEventListener('submit',e=>{
+      e.preventDefault();
+      const l=left.value.trim().toUpperCase();
+      const r=right.value.trim().toUpperCase();
+      const key=`${l}|${r}`;
 
-    resp.className=''; resp.innerHTML='';
-    document.body.classList.remove('fail-bg');
+      resp.className=''; resp.innerHTML=''; document.body.classList.remove('fail-bg');
 
-    if(!/^[A-Za-z0-9]{1,6}$/.test(l) || !/^[A-Za-z0-9]{1,6}$/.test(r)){
-      resp.textContent = 'Każde pole: 1-6 znaków (litery/cyfry).';
-      resp.classList.add('neutral');
-    }else if(key in pairMap){
-      resp.textContent = `§ ${pairMap[key]}`;   /* znak paragrafu + opis */
-      resp.classList.add('good');
-    }else{
-      document.body.classList.add('fail-bg');
-      resp.innerHTML = "<img src='assets/FAIL.PNG' alt='Fail' class='fail-icon'>";
-      resp.classList.add('bad');
-    }
-
-    left.value=''; right.value=''; left.focus();
-  });
+      if(!/^[A-Za-z0-9]{1,6}$/.test(l)||!/^[A-Za-z0-9]{1,6}$/.test(r)){
+        resp.textContent='Każde pole: 1-6 znaków (litery/cyfry).'; resp.classList.add('neutral');
+      }else if(key in pairMap){
+        resp.textContent=`§ ${pairMap[key]}`; resp.classList.add('good');
+      }else{
+        document.body.classList.add('fail-bg');
+        resp.innerHTML="<img src='assets/FAIL.PNG' alt='Fail' class='fail-icon'>"; resp.classList.add('bad');
+      }
+      left.value=''; right.value=''; left.focus();
+    });
   </script>
 </body>
 </html>
